@@ -2,9 +2,9 @@
 # Script Name: rhel_sysprep.sh
 # Author(s): Stephen K
 # Company: Cloud Initiatives Inc.
-# Description: CentOS7 Server Image Builder
+# Description: RHEL/CentOS7 Server System Preparation for Template or Image Creation
 # Date Last Modified: 8-3-2018
-# Version: .02
+# Version: .03
 #
 #############################################################################################################
 
@@ -21,9 +21,19 @@
 # YUM Update and package installations
 yum update --skip-broken -y
 yum install open-vm-tools yum-utils perl vim -y
+if [ -f reboot.chk ]; then
+    echo "\e[93mNo reboot required.  Continuing...\e[0m"
+    sleep 3
+else
+    echo -e "\e[93mThe system needs to reboot to boot with new kernel - please rerun the script after reboot\e[0m"
+    sleep 3
+    touch reboot.chk
+    reboot
+fi
 
 # Stop logging services
 /sbin/service rsyslog stop
+# systemctl stop rsyslog.service
 /sbin/service auditd stop
 
 # Remove old kernels
@@ -48,6 +58,7 @@ yum install open-vm-tools yum-utils perl vim -y
 /bin/rm -f /etc/udev/rules.d/70*
 
 # Remove UUID's from ifcfg scripts
+/bin/cat /etc/sysconfig/network-scripts/ifcfg-e*
 /bin/sed "/UUID/d" /etc/sysconfig/network-scripts/ifcfg-e*
 
 # Clean tmp directories
@@ -64,6 +75,8 @@ unset HISTFILE
 # Remove root users SSH history
 /bin/rm -rf ~root/.ssh/
 /bin/rm -f ~root/anaconda-ks.cfg
+/bin/rm -f reboot.chk
+
 echo ""
 echo ""
 echo -e "\e[93mRun the following manually as they cannot be run from within a script\e[0m"
