@@ -48,7 +48,7 @@ yum install open-vm-tools yum-utils perl vim -y
 /bin/rm -f /etc/udev/rules.d/70*
 
 # Remove UUID's from ifcfg scripts
-/bin/sed "/UUID/d" /etc/sysconfig/network-scripts/ifcfg-e*/bin/sed "/UUID/d" /etc/sysconfig/network-scripts/ifcfg-e*
+/bin/sed "/UUID/d" /etc/sysconfig/network-scripts/ifcfg-e*
 
 # Clean tmp directories
 /bin/rm -rf /tmp/*
