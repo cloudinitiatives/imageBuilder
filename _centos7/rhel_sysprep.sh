@@ -22,7 +22,7 @@
 yum update --skip-broken -y
 yum install open-vm-tools yum-utils perl vim -y
 if [ -f reboot.chk ]; then
-    echo "\e[93mNo reboot required.  Continuing...\e[0m"
+    echo -e "\e[93mNo reboot required.  Continuing...\e[0m"
     sleep 3
 else
     echo -e "\e[93mThe system needs to reboot to boot with new kernel - please rerun the script after reboot\e[0m"
