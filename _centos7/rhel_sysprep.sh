@@ -1,10 +1,10 @@
 #############################################################################################################
-# Script Name: LimageBuilder
-# Author(s): Stephen Kalapati
-# Company: VMware
+# Script Name: rhel_sysprep.sh
+# Author(s): Stephen K
+# Company: Cloud Initiatives Inc.
 # Description: CentOS7 Server Image Builder
-# Date Last Modified: 8-2-2018
-# Version: .01
+# Date Last Modified: 8-3-2018
+# Version: .02
 #
 #############################################################################################################
 
@@ -13,11 +13,12 @@
 # 2. "Network and Hostname" - Toggle the Network card to on, and click on "General" and check the "Automatically connect to this network when it is available".
 # 3. "Software Selection" - Under "Infrastructure Server", Select "Guest Agents". (Only if using the DVD iso)
 # 4. "Installation Destination" - Select the virtual disk.
+# 5. "Date and Time" - Set and make sure NTP is on
 # 5. "Begin Installation" - Set root password.
 
 #!/usr/bin/env bash
 
-# YUM Update and Package Installation
+# YUM Update and package installations
 yum update --skip-broken -y
 yum install open-vm-tools yum-utils perl vim -y
 
