@@ -18,7 +18,7 @@
 
 #!/usr/bin/env bash
 
-# YUM Update and package installations
+# YUM update and package installations
 yum update --skip-broken -y
 yum install open-vm-tools yum-utils perl vim -y
 if [ -f reboot.chk ]; then
